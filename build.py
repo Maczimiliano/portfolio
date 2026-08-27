@@ -71,11 +71,11 @@ EARLY = [
                 dict(f="mcz-2.mp4", link="https://www.instagram.com/reel/Cdj6cvWD3To/")],
          note="Personal wellness project: sport, health and fitness content."),
     dict(name="La Casa del Gato: Bungalows", sub="Brand identity",
-         files=[],
-         note="Full identity for a coastal bungalow brand: mark, wordmark and a five-colour system built to survive signage, social and print. The source file behind the original link is a Canva PDF, not a video, so no media is embedded here per the no-Canva rule."),
+         files=[], pages=dict(folder="casa-del-gato", count=9, cols=None),
+         note="Full identity for a coastal bungalow brand: mark, wordmark and a five-colour system built to survive signage, social and print."),
     dict(name="UtelStays: listing templates", sub="Social template system",
-         files=[],
-         note="A locked grid, type scale and colour system that let a non-designer publish on-brand property posts daily. The source file behind the original link is a Canva PDF, not a video, so no media is embedded here per the no-Canva rule."),
+         files=[], pages=dict(folder="utel", count=12, cols=6),
+         note="A locked grid, type scale and colour system that let a non-designer publish on-brand property posts daily."),
 ]
 
 def video_card(file, client, caption, group="grohak"):
@@ -118,6 +118,16 @@ rest_videos_html = "\n".join(video_card(f, c, cap) for f, c, cap, feat in rest_v
 
 image_grid_html = "\n".join(image_card(f, client, cap, feat) for f, client, cap, feat in ALL_IMAGES)
 
+def pages_strip(folder, count, cols):
+    imgs = "\n".join(
+        f'<img src="media/early/{folder}/pages/p{i:02d}.png" alt="">'
+        for i in range(1, count + 1)
+    )
+    if cols:
+        style = f'display:grid;grid-template-columns:repeat({cols},1fr)'
+        return f'<div class="pagestrip pagegrid" style="{style}">{imgs}\n      </div>'
+    return f'<div class="pagestrip">{imgs}\n      </div>'
+
 early_html = ""
 early_dirs = {
     "helloCash": "hellocash", "helloVEA": "hellovea", "Hudbay Perú: Ping Pong": "hudbay",
@@ -126,6 +136,19 @@ early_dirs = {
 }
 for item in EARLY:
     gdir = early_dirs[item["name"]]
+    pages = item.get("pages")
+    if pages:
+        strip = pages_strip(pages["folder"], pages["count"], pages["cols"])
+        early_html += f"""
+    <div class="egroup epagerow">
+      <div class="ehead">
+        <h3>{item['name']}</h3>
+        <span class="esub">{item['sub']}</span>
+        <p>{item['note']}</p>
+      </div>
+      {strip}
+    </div>"""
+        continue
     cards = "\n".join(early_video_card(f, gdir) for f in item["files"])
     mediahtml = f'<div class="vgrid small">{cards}\n      </div>' if item["files"] else ""
     early_html += f"""
@@ -211,6 +234,19 @@ HTML = f"""<!doctype html>
   .ehead h3 {{ font-size: 16px; margin: 0 0 2px; }}
   .ehead .esub {{ font-size: 12px; color: var(--accent); font-weight: 600; }}
   .ehead p {{ margin: 6px 0 14px; color: var(--muted); font-size: 13.5px; max-width: 640px; }}
+
+  .epagerow {{ display: flex; gap: 20px; align-items: flex-start; }}
+  .epagerow .ehead {{ flex: 0 0 240px; }}
+  .epagerow .ehead p {{ margin-bottom: 0; }}
+  .pagestrip {{ flex: 1; display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; min-width: 0; }}
+  .pagestrip img {{ height: 96px; width: auto; flex: none; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); }}
+  .pagestrip.pagegrid {{ display: grid; gap: 6px; overflow-x: visible; }}
+  .pagestrip.pagegrid img {{ height: auto; width: 100%; display: block; }}
+
+  @media (max-width: 720px) {{
+    .epagerow {{ flex-direction: column; }}
+    .epagerow .ehead {{ flex: none; }}
+  }}
 
   footer {{ padding: 56px 0 70px; border-top: 1px solid var(--line); }}
   footer h2 {{ font-size: 26px; margin: 0 0 16px; }}
