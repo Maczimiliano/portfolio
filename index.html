@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mateo Calderón · Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --panel: #FFFFFF;
+    --ink: #14151A;
+    --muted: #6B6D76;
+    --line: #E7E5E0;
+    --accent: #1B75BB;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 20; background: rgba(250,250,248,.92);
+    backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: .2px; }
+  .brand img { height: 26px; width: auto; }
+  nav a { color: var(--ink); text-decoration: none; margin-left: 22px; font-size: 14px; }
+  nav a:hover { color: var(--accent); }
+
+  .hero { padding: 64px 0 40px; }
+  .kick { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  h1.title { font-size: 42px; margin: 10px 0 14px; letter-spacing: -.5px; }
+  .lede { max-width: 680px; color: #33343B; font-size: 17px; }
+  .contact { margin-top: 20px; font-size: 14px; color: var(--muted); }
+  .contact span { margin-right: 18px; }
+
+  section { padding: 52px 0; border-top: 1px solid var(--line); }
+  .shead { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; flex-wrap: wrap; gap: 8px; }
+  .shead h2 { font-size: 24px; margin: 0; }
+  .shead p { margin: 0; color: var(--muted); font-size: 14px; max-width: 460px; }
+
+  .vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+  .vgrid.hero-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .vgrid.small { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+
+  .vcard { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .vcard video { width: 100%; aspect-ratio: 9/16; object-fit: cover; background: #000; display: block; }
+  .vcard figcaption { padding: 10px 12px; font-size: 13px; }
+  .vcard figcaption b { display: block; font-size: 12.5px; }
+  .vcard figcaption span { color: var(--muted); font-size: 12px; }
+  .vcard.small figcaption { display: none; }
+  .vcard.small.landscape figcaption, .vcard.small.linked figcaption { display: block; padding: 8px 10px; }
+  .vcard.small.landscape figcaption a, .vcard.small.linked figcaption a { font-size: 12px; text-decoration: none; }
+  .vgrid.small .vcard.landscape { grid-column: span 2; }
+
+  .igrid { column-count: 4; column-gap: 14px; }
+  .icard { margin: 0 0 14px; break-inside: avoid; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .icard img { width: 100%; display: block; }
+  .icard figcaption { padding: 8px 10px; font-size: 11.5px; }
+  .icard figcaption b { display: block; font-size: 11px; }
+  .icard figcaption span { color: var(--muted); font-size: 11px; }
+  .icard.featured { border-color: var(--accent); }
+
+  .egroup { margin-bottom: 36px; }
+  .ehead h3 { font-size: 16px; margin: 0 0 2px; }
+  .ehead .esub { font-size: 12px; color: var(--accent); font-weight: 600; }
+  .ehead p { margin: 6px 0 14px; color: var(--muted); font-size: 13.5px; max-width: 640px; }
+
+  footer { padding: 56px 0 70px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 26px; margin: 0 0 16px; }
+  .ctgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 16px; margin-top: 24px; font-size: 14px; }
+  .ctgrid dt { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+  .ctgrid dd { margin: 4px 0 0; }
+
+  @media (max-width: 720px) {
+    .igrid { column-count: 2; }
+    h1.title { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap topbar">
+    <div class="brand"><img src="assets/mc-mark.png" alt="MC"> Mateo Calderón</div>
+    <nav>
+      <a href="#video">Video</a>
+      <a href="#campaigns">Campaigns</a>
+      <a href="#early">Earlier work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <div class="kick">Selected work · 2026</div>
+  <h1 class="title">I build the ads, videos and copy that convert.</h1>
+  <p class="lede">Growth Creative Specialist: conversion-driven ad design, short-form vertical and landscape video,
+    scripts and copy, for a range of client brands. This page embeds the actual deliverables, videos and
+    images, so you can watch and see the work directly.</p>
+  <div class="contact">
+    <span>Growth Creative Specialist</span>
+    <span>Lima, Peru · Remote</span>
+    <span>mateo_cz@hotmail.com</span>
+    <span>linkedin.com/in/mateocz</span>
+  </div>
+</div>
+
+<section id="video" class="wrap">
+  <div class="shead">
+    <h2>Grohak Agency · Video</h2>
+    <p>Script to export: hooks, AI scene generation, edit, burned-in captions, brand end-cards.</p>
+  </div>
+  <div class="vgrid hero-grid">
+      <figure class="vcard">
+        <video src="media/grohak/videos/arm-own-mountain.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>American Resort Partners</b><span>Own the mountain</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/gree-w2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Greenlite Holdings</b><span>Weekly investor update, batch 2</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/gree-broader-access.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Greenlite Holdings</b><span>Broader access, same brand engine</span></figcaption>
+      </figure>
+  </div>
+  <div class="vgrid" style="margin-top:18px">
+      <figure class="vcard">
+        <video src="media/grohak/videos/fr-video1.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Client FR</b><span>Vertical brand film</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/rc-video2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Roll Craft</b><span>Vertical brand video, cut 2</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/awe-already-standing.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Ethos Baja</b><span>Already standing, built on real footage</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/awe-own-it.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Ethos Baja</b><span>Own it, the perk-led angle</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/roxg-v2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>Lead-gen film, cut 2</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/roxg-v1.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>Lead-gen film, cut 1</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/spo-v2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Spongelle</b><span>Vertical ad, cut 2</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/glo-v1.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>GLO by Gabbi</b><span>Investor webinar cut</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/pye-v2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Pytheas Energy</b><span>Investor film, cut 2</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/pye-ai-finds-20s.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Pytheas Energy</b><span>20-second cut: AI Finds / We Buy / You Invest</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/rox-webinarvid2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>RoxStart AI Logistics</b><span>Investor webinar ad, cut 2</span></figcaption>
+      </figure>
+  </div>
+</section>
+
+<section id="campaigns" class="wrap">
+  <div class="shead">
+    <h2>Grohak Agency · Ad campaigns</h2>
+    <p>Static ads for Meta, one fixed spine and one variable per batch.</p>
+  </div>
+  <div class="igrid">
+      <figure class="icard featured">
+        <img src="media/grohak/images/spo-ad1.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>Static ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/spo-retargeting-11.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>Retargeting ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/spo-retargeting-5.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>Retargeting ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/glo-ad6.png" alt="" loading="lazy">
+        <figcaption><b>GLO by Gabbi</b><span>Static ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/glo-brand-deal.png" alt="" loading="lazy">
+        <figcaption><b>GLO by Gabbi</b><span>Brand-deal angle ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/glo-ad3.png" alt="" loading="lazy">
+        <figcaption><b>GLO by Gabbi</b><span>Static ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/roxlg-43.png" alt="" loading="lazy">
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>Static ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/roxlg-scene.png" alt="" loading="lazy">
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>AI-generated product scene</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/glo-webinar.png" alt="" loading="lazy">
+        <figcaption><b>GLO by Gabbi</b><span>Webinar promo ad</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/roxlg-extra.png" alt="" loading="lazy">
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>Static ad</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-get-in-first.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>Get in first: the timing angle</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-own-your-rest.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>Own your rest: the perk-led angle</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-the-wave.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>The wave: market size framed as an invitation</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-napa-of-mexico.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>Napa of Mexico: place as the proof</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-already-standing.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>Already standing</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-the-window.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>The window</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/awe-use-it.png" alt="" loading="lazy">
+        <figcaption><b>Ethos Baja</b><span>Use it</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/pye-ad5.png" alt="" loading="lazy">
+        <figcaption><b>Pytheas Energy</b><span>Static ad, 1:1</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/pye-ad6.png" alt="" loading="lazy">
+        <figcaption><b>Pytheas Energy</b><span>Static ad, 1:1</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/pye-ad5-2.png" alt="" loading="lazy">
+        <figcaption><b>Pytheas Energy</b><span>Static ad, 9:16 cut</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/pye-ad5-4.png" alt="" loading="lazy">
+        <figcaption><b>Pytheas Energy</b><span>Static ad, 9:16 cut</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/roxlg-41-safe-carrier.png" alt="" loading="lazy">
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>The equalizer: small brokers against the giants' compliance department</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/roxlg-42-shippers-proof.png" alt="" loading="lazy">
+        <figcaption><b>RoxStart AI Logistics (RoxVault)</b><span>Win more freight: the untested growth angle</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/glo-editing-campaign.png" alt="" loading="lazy">
+        <figcaption><b>GLO by Gabbi</b><span>Campaign ad</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/spo-scene.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>AI-generated product scene</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/spo-webinar-ad5.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>Webinar promo ad</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/spo-webinar-ad1.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>Webinar promo ad</span></figcaption>
+      </figure>
+
+      <figure class="icard">
+        <img src="media/grohak/images/spo-op5-b3.png" alt="" loading="lazy">
+        <figcaption><b>Spongelle</b><span>Static ad</span></figcaption>
+      </figure>
+  </div>
+</section>
+
+<section id="early" class="wrap">
+  <div class="shead">
+    <h2>Earlier work</h2>
+    <p>Brand video, internal comms and identity work from before Grohak Agency.</p>
+  </div>
+  
+    <div class="egroup">
+      <div class="ehead">
+        <h3>helloCash</h3>
+        <span class="esub">Brand videos, AI production</span>
+        <p>AI-produced brand videos for a digital-wallet product.</p>
+      </div>
+      <div class="vgrid small">
+      <figure class="vcard small">
+        <video src="media/early/hellocash/hellocash-1.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video>
+      </figure>
+
+      <figure class="vcard small">
+        <video src="media/early/hellocash/hellocash-2.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video>
+      </figure>
+
+      <figure class="vcard small">
+        <video src="media/early/hellocash/hellocash-3.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video>
+      </figure>
+      </div>
+    </div>
+    <div class="egroup">
+      <div class="ehead">
+        <h3>helloVEA</h3>
+        <span class="esub">Sub-brand videos</span>
+        <p>Sub-brand video work under the same product family.</p>
+      </div>
+      <div class="vgrid small">
+      <figure class="vcard small">
+        <video src="media/early/hellovea/hellovea-1.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video>
+      </figure>
+
+      <figure class="vcard small landscape">
+        <video src="media/early/hellovea/hellovea-2.mp4" controls preload="metadata" playsinline style="aspect-ratio:16/9"></video>
+      </figure>
+      </div>
+    </div>
+    <div class="egroup">
+      <div class="ehead">
+        <h3>Hudbay Perú: Ping Pong</h3>
+        <span class="esub">Internal communications campaign</span>
+        <p>Internal video series created for a multinational mining company, to humanize corporate culture across a distributed workforce, part of a culture and recognition programme that lifted internal engagement by 30%.</p>
+      </div>
+      <div class="vgrid small">
+      <figure class="vcard small landscape">
+        <video src="media/early/hudbay/hudbay-1.mp4" controls preload="metadata" playsinline style="aspect-ratio:16/9"></video>
+      </figure>
+
+      <figure class="vcard small landscape">
+        <video src="media/early/hudbay/hudbay-2.mp4" controls preload="metadata" playsinline style="aspect-ratio:16/9"></video>
+      </figure>
+      </div>
+    </div>
+    <div class="egroup">
+      <div class="ehead">
+        <h3>Suplemento Funcional</h3>
+        <span class="esub">Entrepreneurship, product video</span>
+        <p>Product video for an independent functional-supplement venture.</p>
+      </div>
+      <div class="vgrid small">
+      <figure class="vcard small">
+        <video src="media/early/suplemento/suplemento-1.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video>
+      </figure>
+      </div>
+    </div>
+    <div class="egroup">
+      <div class="ehead">
+        <h3>Mcz Workout</h3>
+        <span class="esub">Wellness project, Instagram Reels</span>
+        <p>Personal wellness project: sport, health and fitness content.</p>
+      </div>
+      <div class="vgrid small">
+      <figure class="vcard small linked">
+        <video src="media/early/mczworkout/mcz-1.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video><figcaption><a href="https://www.instagram.com/reel/ClVFUeZj9Ck/" target="_blank" rel="noopener">View on Instagram &#8599;</a></figcaption>
+      </figure>
+
+      <figure class="vcard small linked">
+        <video src="media/early/mczworkout/mcz-2.mp4" controls preload="metadata" playsinline style="aspect-ratio:9/16"></video><figcaption><a href="https://www.instagram.com/reel/Cdj6cvWD3To/" target="_blank" rel="noopener">View on Instagram &#8599;</a></figcaption>
+      </figure>
+      </div>
+    </div>
+    <div class="egroup">
+      <div class="ehead">
+        <h3>La Casa del Gato: Bungalows</h3>
+        <span class="esub">Brand identity</span>
+        <p>Full identity for a coastal bungalow brand: mark, wordmark and a five-colour system built to survive signage, social and print. The source file behind the original link is a Canva PDF, not a video, so no media is embedded here per the no-Canva rule.</p>
+      </div>
+      
+    </div>
+    <div class="egroup">
+      <div class="ehead">
+        <h3>UtelStays: listing templates</h3>
+        <span class="esub">Social template system</span>
+        <p>A locked grid, type scale and colour system that let a non-designer publish on-brand property posts daily. The source file behind the original link is a Canva PDF, not a video, so no media is embedded here per the no-Canva rule.</p>
+      </div>
+      
+    </div>
+</section>
+
+<footer id="contact" class="wrap">
+  <h2>Let's make the next one convert.</h2>
+  <p style="color:var(--muted);max-width:560px">Full campaign files, scripts and edit notes behind any piece
+    shown here are available on request.</p>
+  <dl class="ctgrid">
+    <div><dt>Email</dt><dd>mateo_cz@hotmail.com</dd></div>
+    <div><dt>Phone</dt><dd>+51 931 949 380</dd></div>
+    <div><dt>LinkedIn</dt><dd>/in/mateocz</dd></div>
+    <div><dt>Based in</dt><dd>Lima, Peru · Remote</dd></div>
+  </dl>
+</footer>
+
+</body>
+</html>
