@@ -19,6 +19,31 @@ VIDEOS = [
     ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
 ]
 
+LANDING_PAGES = [
+    dict(file="gree-invest-operator.png", client="Greenlite Holdings",
+         title="Investor landing page, Reg D 506(c)",
+         desc="Hero offer, accredited-investor lead form, and track-record stats."),
+    dict(file="glo-webinar8.png", client="GLO by Gabbi",
+         title="Investor webinar registration page",
+         desc="Live countdown, founder video, and an RSVP form for the live session."),
+    dict(file="jast-pharma.png", client="Jast Labs",
+         title="Investment opportunity landing page",
+         desc="Pitch, credibility grid, and the market case for the raise."),
+]
+
+def landing_card(item):
+    src = f"media/grohak/landingpages/{item['file']}"
+    return f"""
+      <div class="lpcard">
+        <div class="lpchrome"><span></span><span></span><span></span></div>
+        <div class="lpwindow"><div class="lpscroll">scroll ↓</div><img src="{src}" alt=""></div>
+        <div class="lpcaption">
+          <b>{item['client']}</b>
+          <span>{item['title']}</span>
+          <p>{item['desc']}</p>
+        </div>
+      </div>"""
+
 # One flowing sequence, not grouped by brand. Ordered from strongest to weakest,
 # per Mateo's picks: Spongelle 3 named first, GLO's 3 best next, Ethos Baja
 # clustered around the middle, then all of Pytheas as a block, then the rest.
@@ -117,6 +142,8 @@ hero_videos_html = "\n".join(video_card(f, c, cap) for f, c, cap, feat in featur
 rest_videos_html = "\n".join(video_card(f, c, cap) for f, c, cap, feat in rest_videos)
 
 image_grid_html = "\n".join(image_card(f, client, cap, feat) for f, client, cap, feat in ALL_IMAGES)
+
+landing_pages_html = "\n".join(landing_card(item) for item in LANDING_PAGES)
 
 def pages_strip(folder, count, cols):
     imgs = "\n".join(
@@ -235,6 +262,18 @@ HTML = f"""<!doctype html>
   .ehead .esub {{ font-size: 12px; color: var(--accent); font-weight: 600; }}
   .ehead p {{ margin: 6px 0 14px; color: var(--muted); font-size: 13.5px; max-width: 640px; }}
 
+  .lpgrid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }}
+  .lpcard {{ background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(20,21,26,.05); }}
+  .lpchrome {{ display: flex; gap: 6px; padding: 10px 12px; background: #F0EEE9; border-bottom: 1px solid var(--line); }}
+  .lpchrome span {{ width: 9px; height: 9px; border-radius: 50%; background: #D8D5CE; }}
+  .lpwindow {{ position: relative; height: 560px; overflow-y: auto; background: #fff; }}
+  .lpwindow img {{ width: 100%; display: block; }}
+  .lpscroll {{ position: sticky; top: 10px; margin: 0 10px 0 auto; width: fit-content; background: rgba(20,21,26,.72); color: #fff; font-size: 10.5px; padding: 3px 8px; border-radius: 20px; pointer-events: none; }}
+  .lpcaption {{ padding: 14px 16px; }}
+  .lpcaption b {{ display: block; font-size: 14px; }}
+  .lpcaption span {{ display: block; color: var(--accent); font-size: 11.5px; font-weight: 600; margin: 3px 0 7px; }}
+  .lpcaption p {{ margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.5; }}
+
   .epagerow {{ display: flex; gap: 20px; align-items: flex-start; }}
   .epagerow .ehead {{ flex: 0 0 240px; }}
   .epagerow .ehead p {{ margin-bottom: 0; }}
@@ -246,6 +285,7 @@ HTML = f"""<!doctype html>
   @media (max-width: 720px) {{
     .epagerow {{ flex-direction: column; }}
     .epagerow .ehead {{ flex: none; }}
+    .lpgrid {{ grid-template-columns: 1fr; }}
   }}
 
   footer {{ padding: 56px 0 70px; border-top: 1px solid var(--line); }}
@@ -268,6 +308,7 @@ HTML = f"""<!doctype html>
     <nav>
       <a href="#video">Video</a>
       <a href="#campaigns">Campaigns</a>
+      <a href="#landingpages">Landing pages</a>
       <a href="#early">Earlier work</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -305,6 +346,15 @@ HTML = f"""<!doctype html>
     <p>Static ads for Meta, one fixed spine and one variable per batch.</p>
   </div>
   <div class="igrid">{image_grid_html}
+  </div>
+</section>
+
+<section id="landingpages" class="wrap">
+  <div class="shead">
+    <h2>Grohak Agency · Landing pages</h2>
+    <p>Landing pages and funnels built in Go High Level. Scroll each window to see the full page.</p>
+  </div>
+  <div class="lpgrid">{landing_pages_html}
   </div>
 </section>
 
