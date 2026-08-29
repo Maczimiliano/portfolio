@@ -6,6 +6,8 @@ VIDEOS = [
     ("arm-own-mountain.mp4", "American Resort Partners", "Own the mountain", True),
     ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", True),
     ("gree-broader-access.mp4", "Greenlite Holdings", "Broader access, same brand engine", True),
+    ("dol-back-for-found-oil.mp4", "Dolomite Energy", "Back for oil that's already been found", False),
+    ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
     ("fr-video1.mp4", "Client FR", "Vertical brand film", False),
     ("rc-video2.mp4", "Roll Craft", "Vertical brand video, cut 2", False),
     ("awe-already-standing.mp4", "Ethos Baja", "Already standing, built on real footage", False),
@@ -16,7 +18,6 @@ VIDEOS = [
     ("glo-v1.mp4", "GLO by Gabbi", "Investor webinar cut", False),
     ("pye-v2.mp4", "Pytheas Energy", "Investor film, cut 2", False),
     ("pye-ai-finds-20s.mp4", "Pytheas Energy", "20-second cut: AI Finds / We Buy / You Invest", False),
-    ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
 ]
 
 LANDING_PAGES = [
