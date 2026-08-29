@@ -7,6 +7,7 @@ VIDEOS = [
     ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", True),
     ("gree-broader-access.mp4", "Greenlite Holdings", "Broader access, same brand engine", True),
     ("dol-back-for-found-oil.mp4", "Dolomite Energy", "Back for oil that's already been found", False),
+    ("dol-back-for-found-oil-1x1.mp4", "Dolomite Energy", "Same film adapted to 1:1", False, "1:1"),
     ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
     ("fr-video1.mp4", "Client FR", "Vertical brand film", False),
     ("rc-video2.mp4", "Roll Craft", "Vertical brand video, cut 2", False),
@@ -55,6 +56,7 @@ ALL_IMAGES = [
     ("glo-ad6.png", "GLO by Gabbi", "Static ad", True),
     ("glo-brand-deal.png", "GLO by Gabbi", "Brand-deal angle ad", True),
     ("glo-ad3.png", "GLO by Gabbi", "Static ad", True),
+    ("gree-op5-b3.png", "Greenlite Holdings", "Outgrown fractional real estate: the operating-company angle", True),
     ("roxlg-43.png", "RoxStart AI Logistics (RoxVault)", "Static ad", True),
     ("roxlg-scene.png", "RoxStart AI Logistics (RoxVault)", "AI-generated product scene", True),
     ("glo-webinar.png", "GLO by Gabbi", "Webinar promo ad", True),
@@ -76,7 +78,6 @@ ALL_IMAGES = [
     ("spo-scene.png", "Spongelle", "AI-generated product scene", False),
     ("spo-webinar-ad5.png", "Spongelle", "Webinar promo ad", False),
     ("spo-webinar-ad1.png", "Spongelle", "Webinar promo ad", False),
-    ("spo-op5-b3.png", "Spongelle", "Static ad", False),
 ]
 
 EARLY = [
@@ -104,10 +105,11 @@ EARLY = [
          note="A locked grid, type scale and colour system that let a non-designer publish on-brand property posts daily."),
 ]
 
-def video_card(file, client, caption, group="grohak"):
+def video_card(file, client, caption, group="grohak", aspect="9:16"):
     src = f"media/{group}/videos/{file}"
+    cls = "vcard square" if aspect == "1:1" else "vcard"
     return f"""
-      <figure class="vcard">
+      <figure class="{cls}">
         <video src="{src}" controls preload="metadata" playsinline></video>
         <figcaption><b>{client}</b><span>{caption}</span></figcaption>
       </figure>"""
@@ -139,8 +141,8 @@ def image_card(file, client, caption, featured):
 featured_videos = [v for v in VIDEOS if v[3]]
 rest_videos = [v for v in VIDEOS if not v[3]]
 
-hero_videos_html = "\n".join(video_card(f, c, cap) for f, c, cap, feat in featured_videos)
-rest_videos_html = "\n".join(video_card(f, c, cap) for f, c, cap, feat in rest_videos)
+hero_videos_html = "\n".join(video_card(v[0], v[1], v[2]) for v in featured_videos)
+rest_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in rest_videos)
 
 image_grid_html = "\n".join(image_card(f, client, cap, feat) for f, client, cap, feat in ALL_IMAGES)
 
@@ -242,6 +244,8 @@ HTML = f"""<!doctype html>
 
   .vcard {{ margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }}
   .vcard video {{ width: 100%; aspect-ratio: 9/16; object-fit: cover; background: #000; display: block; }}
+  .vcard.square {{ align-self: start; }}
+  .vcard.square video {{ aspect-ratio: 1/1; }}
   .vcard figcaption {{ padding: 10px 12px; font-size: 13px; }}
   .vcard figcaption b {{ display: block; font-size: 12.5px; }}
   .vcard figcaption span {{ color: var(--muted); font-size: 12px; }}

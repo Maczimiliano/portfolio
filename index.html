@@ -51,6 +51,8 @@
 
   .vcard { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
   .vcard video { width: 100%; aspect-ratio: 9/16; object-fit: cover; background: #000; display: block; }
+  .vcard.square { align-self: start; }
+  .vcard.square video { aspect-ratio: 1/1; }
   .vcard figcaption { padding: 10px 12px; font-size: 13px; }
   .vcard figcaption b { display: block; font-size: 12.5px; }
   .vcard figcaption span { color: var(--muted); font-size: 12px; }
@@ -166,6 +168,11 @@
         <figcaption><b>Dolomite Energy</b><span>Back for oil that's already been found</span></figcaption>
       </figure>
 
+      <figure class="vcard square">
+        <video src="media/grohak/videos/dol-back-for-found-oil-1x1.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Dolomite Energy</b><span>Same film adapted to 1:1</span></figcaption>
+      </figure>
+
       <figure class="vcard">
         <video src="media/grohak/videos/rox-webinarvid2.mp4" controls preload="metadata" playsinline></video>
         <figcaption><b>RoxStart AI Logistics</b><span>Investor webinar ad, cut 2</span></figcaption>
@@ -257,6 +264,11 @@
       <figure class="icard featured">
         <img src="media/grohak/images/glo-ad3.png" alt="" loading="lazy">
         <figcaption><b>GLO by Gabbi</b><span>Static ad</span></figcaption>
+      </figure>
+
+      <figure class="icard featured">
+        <img src="media/grohak/images/gree-op5-b3.png" alt="" loading="lazy">
+        <figcaption><b>Greenlite Holdings</b><span>Outgrown fractional real estate: the operating-company angle</span></figcaption>
       </figure>
 
       <figure class="icard featured">
@@ -362,11 +374,6 @@
       <figure class="icard">
         <img src="media/grohak/images/spo-webinar-ad1.png" alt="" loading="lazy">
         <figcaption><b>Spongelle</b><span>Webinar promo ad</span></figcaption>
-      </figure>
-
-      <figure class="icard">
-        <img src="media/grohak/images/spo-op5-b3.png" alt="" loading="lazy">
-        <figcaption><b>Spongelle</b><span>Static ad</span></figcaption>
       </figure>
   </div>
 </section>
