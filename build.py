@@ -57,18 +57,20 @@ def landing_card(item):
         </div>
       </div>"""
 
-# One flowing sequence, not grouped by brand. Ordered from strongest to weakest,
-# per Mateo's picks: Spongelle 3 named first, GLO's 3 best next, Ethos Baja
-# clustered around the middle, then all of Pytheas as a block, then the rest.
+# One flowing sequence, not grouped by brand. The grid below lays these out in
+# rows, left to right, so this list is the reading order: strongest first, per
+# Mateo's picks. Spongelle's 3 named first, then the Greenlite operating-company
+# ad to close the top row, GLO's 3 best next, Ethos Baja around the middle, all of
+# Pytheas as a block, then the rest.
 ALL_IMAGES = [
     ("spo-ad1.png", "Spongelle", "Static ad", True),
     ("spo-retargeting-11.png", "Spongelle", "Retargeting ad", True),
     ("spo-retargeting-5.png", "Spongelle", "Retargeting ad", True),
+    ("gree-op5-b3.png", "Greenlite Holdings", "Outgrown fractional real estate: the operating-company angle", True),
     ("glo-ad6.png", "GLO by Gabbi", "Static ad", True),
     ("glo-brand-deal.png", "GLO by Gabbi", "Brand-deal angle ad", True),
     ("glo-ad3.png", "GLO by Gabbi", "Static ad", True),
     ("roxlg-scene.png", "RoxStart AI Logistics (RoxVault)", "AI-generated product scene", True),
-    ("gree-op5-b3.png", "Greenlite Holdings", "Outgrown fractional real estate: the operating-company angle", True),
     ("roxlg-43.png", "RoxStart AI Logistics (RoxVault)", "Static ad", True),
     ("glo-webinar.png", "GLO by Gabbi", "Webinar promo ad", True),
     ("roxlg-extra.png", "RoxStart AI Logistics (RoxVault)", "Static ad", False),
@@ -262,8 +264,9 @@ HTML = f"""<!doctype html>
   .vcard.small.landscape figcaption a, .vcard.small.linked figcaption a {{ font-size: 12px; text-decoration: none; }}
   .vgrid.small .vcard.landscape {{ grid-column: span 2; }}
 
-  .igrid {{ column-count: 4; column-gap: 14px; }}
-  .icard {{ margin: 0 0 14px; break-inside: avoid; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }}
+  .igrid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px; align-items: start; }}
+  .icard {{ margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }}
   .icard img {{ width: 100%; display: block; }}
   .icard figcaption {{ padding: 8px 10px; font-size: 11.5px; }}
   .icard figcaption b {{ display: block; font-size: 11px; }}
@@ -308,7 +311,7 @@ HTML = f"""<!doctype html>
   .ctgrid dd {{ margin: 4px 0 0; }}
 
   @media (max-width: 720px) {{
-    .igrid {{ column-count: 2; }}
+    .igrid {{ grid-template-columns: repeat(2, 1fr); }}
     h1.title {{ font-size: 30px; }}
   }}
 </style>
