@@ -2,10 +2,8 @@
 # showing real embedded videos and images instead of links.
 
 VIDEOS = [
-    # (file, client, caption, featured)
-    ("arm-own-mountain.mp4", "American Resort Partners", "Own the mountain", True),
-    ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", True),
-    ("gree-broader-access.mp4", "Greenlite Holdings", "Broader access, same brand engine", True),
+    # (file, client, caption, featured). Mateo's top picks open the page from
+    # TOP_VIDEOS instead, so nothing here is promoted; the flag is kept for the record.
     ("dol-back-for-found-oil.mp4", "Dolomite Energy", "Back for oil that's already been found", False),
     ("dol-back-for-found-oil-1x1.mp4", "Dolomite Energy", "Same film adapted to 1:1", False, "1:1"),
     ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
@@ -19,6 +17,19 @@ VIDEOS = [
     ("glo-v1.mp4", "GLO by Gabbi", "Investor webinar cut", False),
     ("pye-v2.mp4", "Pytheas Energy", "Investor film, cut 2", False),
     ("pye-ai-finds-20s.mp4", "Pytheas Energy", "20-second cut: AI Finds / We Buy / You Invest", False),
+]
+
+TOP_VIDEOS = [
+    # Shown before anything else, in Mateo's order. Full src paths rather than bare
+    # filenames, because these come from different media folders.
+    dict(src="media/early/hellocash/hellocash-1.mp4", client="helloCash",
+         caption="Brand video, AI production"),
+    dict(src="media/grohak/videos/arm-own-mountain.mp4", client="American Resort Partners",
+         caption="Own the mountain"),
+    dict(src="media/grohak/videos/gree-w2.mp4", client="Greenlite Holdings",
+         caption="Weekly investor update, batch 2"),
+    dict(src="media/grohak/videos/gree-broader-access.mp4", client="Greenlite Holdings",
+         caption="Broader access, same brand engine"),
 ]
 
 LANDING_PAGES = [
@@ -106,7 +117,7 @@ EARLY = [
 ]
 
 def video_card(file, client, caption, group="grohak", aspect="9:16"):
-    src = f"media/{group}/videos/{file}"
+    src = file if "/" in file else f"media/{group}/videos/{file}"
     cls = "vcard square" if aspect == "1:1" else "vcard"
     return f"""
       <figure class="{cls}">
@@ -138,11 +149,8 @@ def image_card(file, client, caption, featured):
         <figcaption><b>{client}</b><span>{caption}</span></figcaption>
       </figure>"""
 
-featured_videos = [v for v in VIDEOS if v[3]]
-rest_videos = [v for v in VIDEOS if not v[3]]
-
-hero_videos_html = "\n".join(video_card(v[0], v[1], v[2]) for v in featured_videos)
-rest_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in rest_videos)
+top_videos_html = "\n".join(video_card(t["src"], t["client"], t["caption"]) for t in TOP_VIDEOS)
+grohak_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in VIDEOS)
 
 image_grid_html = "\n".join(image_card(f, client, cap, feat) for f, client, cap, feat in ALL_IMAGES)
 
@@ -311,6 +319,7 @@ HTML = f"""<!doctype html>
   <div class="wrap topbar">
     <div class="brand"><img src="assets/mc-mark.png" alt="MC"> Mateo Calderón</div>
     <nav>
+      <a href="#featured">Featured</a>
       <a href="#video">Video</a>
       <a href="#campaigns">Campaigns</a>
       <a href="#landingpages">Landing pages</a>
@@ -334,14 +343,21 @@ HTML = f"""<!doctype html>
   </div>
 </div>
 
+<section id="featured" class="wrap">
+  <div class="shead">
+    <h2>Featured videos</h2>
+    <p>The pieces I would put in front of you first, whichever brand they were made for.</p>
+  </div>
+  <div class="vgrid hero-grid">{top_videos_html}
+  </div>
+</section>
+
 <section id="video" class="wrap">
   <div class="shead">
     <h2>Grohak Agency · Video</h2>
     <p>Script to export: hooks, AI scene generation, edit, burned-in captions, brand end-cards.</p>
   </div>
-  <div class="vgrid hero-grid">{hero_videos_html}
-  </div>
-  <div class="vgrid" style="margin-top:18px">{rest_videos_html}
+  <div class="vgrid">{grohak_videos_html}
   </div>
 </section>
 
