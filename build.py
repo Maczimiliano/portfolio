@@ -59,21 +59,22 @@ def landing_card(item):
 
 # One flowing sequence, not grouped by brand. The grid below lays these out in
 # rows, left to right, so this list is the reading order: strongest first, per
-# Mateo's picks. Spongelle's 3 named first, then the Greenlite operating-company
-# ad to close the top row, GLO's 3 best next, Ethos Baja around the middle, all of
-# Pytheas as a block, then the rest.
+# Mateo's picks, with the Greenlite operating-company ad closing the top row and
+# Ethos Baja around the middle. Pytheas runs as a block except its two 9:16 cuts,
+# which close the page: they are nearly twice the height of a square ad, so
+# anywhere mid-grid they leave a hole under the row that shares their line.
 ALL_IMAGES = [
     ("spo-ad1.png", "Spongelle", "Static ad", True),
     ("spo-retargeting-11.png", "Spongelle", "Retargeting ad", True),
-    ("spo-retargeting-5.png", "Spongelle", "Retargeting ad", True),
-    ("gree-op5-b3.png", "Greenlite Holdings", "Outgrown fractional real estate: the operating-company angle", True),
     ("glo-ad6.png", "GLO by Gabbi", "Static ad", True),
+    ("gree-op5-b3.png", "Greenlite Holdings", "Outgrown fractional real estate: the operating-company angle", True),
+    ("spo-retargeting-5.png", "Spongelle", "Retargeting ad", True),
     ("glo-brand-deal.png", "GLO by Gabbi", "Brand-deal angle ad", True),
     ("glo-ad3.png", "GLO by Gabbi", "Static ad", True),
-    ("roxlg-scene.png", "RoxStart AI Logistics (RoxVault)", "AI-generated product scene", True),
     ("roxlg-43.png", "RoxStart AI Logistics (RoxVault)", "Static ad", True),
+    ("pye-prove-the-system.png", "Pytheas Energy", "Prove the system: the field is the test bed", True),
     ("glo-webinar.png", "GLO by Gabbi", "Webinar promo ad", True),
-    ("roxlg-extra.png", "RoxStart AI Logistics (RoxVault)", "Static ad", False),
+    ("glo-powder-vs-bar.png", "GLO by Gabbi", "Powder is a routine, a bar is an impulse", False),
     ("awe-get-in-first.png", "Ethos Baja", "Get in first: the timing angle", False),
     ("awe-own-your-rest.png", "Ethos Baja", "Own your rest: the perk-led angle", False),
     ("awe-the-wave.png", "Ethos Baja", "The wave: market size framed as an invitation", False),
@@ -83,14 +84,14 @@ ALL_IMAGES = [
     ("awe-use-it.png", "Ethos Baja", "Use it", False),
     ("pye-ad5.png", "Pytheas Energy", "Static ad, 1:1", True),
     ("pye-ad6.png", "Pytheas Energy", "Static ad, 1:1", False),
-    ("pye-ad5-2.png", "Pytheas Energy", "Static ad, 9:16 cut", False),
-    ("pye-ad5-4.png", "Pytheas Energy", "Static ad, 9:16 cut", False),
     ("roxlg-41-safe-carrier.png", "RoxStart AI Logistics (RoxVault)", "The equalizer: small brokers against the giants' compliance department", False),
     ("roxlg-42-shippers-proof.png", "RoxStart AI Logistics (RoxVault)", "Win more freight: the untested growth angle", False),
     ("glo-editing-campaign.png", "GLO by Gabbi", "Campaign ad", False),
     ("spo-scene.png", "Spongelle", "AI-generated product scene", False),
     ("spo-webinar-ad5.png", "Spongelle", "Webinar promo ad", False),
     ("spo-webinar-ad1.png", "Spongelle", "Webinar promo ad", False),
+    ("pye-ad5-2.png", "Pytheas Energy", "Static ad, 9:16 cut", False),
+    ("pye-ad5-4.png", "Pytheas Energy", "Static ad, 9:16 cut", False),
 ]
 
 EARLY = [
