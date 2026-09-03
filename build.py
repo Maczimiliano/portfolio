@@ -7,6 +7,7 @@ VIDEOS = [
     ("dol-back-for-found-oil.mp4", "Dolomite Energy", "Back for oil that's already been found", False),
     ("dol-back-for-found-oil-1x1.mp4", "Dolomite Energy", "Same film adapted to 1:1", False, "1:1"),
     ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
+    ("gree-broader-access.mp4", "Greenlite Holdings", "Broader access, same brand engine", False),
     ("fr-video1.mp4", "Client FR", "Vertical brand film", False),
     ("rc-video2.mp4", "Roll Craft", "Vertical brand video, cut 2", False),
     ("awe-already-standing.mp4", "Ethos Baja", "Already standing, built on real footage", False),
@@ -22,14 +23,14 @@ VIDEOS = [
 TOP_VIDEOS = [
     # Shown before anything else, in Mateo's order. Full src paths rather than bare
     # filenames, because these come from different media folders.
+    dict(src="media/omni-dental/omni-dental-1.mp4", client="Omni Dental",
+         caption="Cinco señales, kinetic-caption ad"),
     dict(src="media/early/hellocash/hellocash-1.mp4", client="helloCash",
          caption="Brand video, AI production"),
     dict(src="media/grohak/videos/arm-own-mountain.mp4", client="American Resort Partners",
          caption="Own the mountain"),
     dict(src="media/grohak/videos/gree-w2.mp4", client="Greenlite Holdings",
          caption="Weekly investor update, batch 2"),
-    dict(src="media/grohak/videos/gree-broader-access.mp4", client="Greenlite Holdings",
-         caption="Broader access, same brand engine"),
 ]
 
 LANDING_PAGES = [
