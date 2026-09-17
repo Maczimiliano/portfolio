@@ -40,10 +40,42 @@
   .contact { margin-top: 20px; font-size: 14px; color: var(--muted); }
   .contact span { margin-right: 18px; }
 
-  section { padding: 52px 0; border-top: 1px solid var(--line); }
+  section { padding: 52px 0; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+  footer { scroll-margin-top: 70px; }
   .shead { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; flex-wrap: wrap; gap: 8px; }
   .shead h2 { font-size: 24px; margin: 0; }
   .shead p { margin: 0; color: var(--muted); font-size: 14px; max-width: 460px; }
+
+  /* Collapsible sections. A phone lays these grids out one card per row, so
+     left open the Video and Ad campaigns sections push Landing pages and
+     Earlier work thousands of pixels down and nobody reaches them. The script
+     at the end of the body folds them under 721px and leaves desktop as it
+     was. Native <details>, so it still opens with no JS and on a keyboard. */
+  details.fold { margin: 0; }
+  details.fold > summary {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px; margin-bottom: 26px;
+    cursor: pointer; list-style: none; -webkit-tap-highlight-color: transparent;
+  }
+  details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary::marker { content: ""; }
+  details.fold > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }
+  details.fold h2 { display: flex; align-items: center; gap: 10px; font-size: 24px; margin: 0; }
+  details.fold > summary:hover h2 { color: var(--accent); }
+  .fdesc { color: var(--muted); font-size: 14px; max-width: 460px; }
+  .chev { flex: none; width: 13px; height: 13px; color: var(--muted); transition: transform .18s ease; }
+  .chev::before {
+    content: ""; display: block; width: 7px; height: 7px; margin: 1px 0 0 2px;
+    border-right: 1.9px solid currentColor; border-bottom: 1.9px solid currentColor;
+    transform: rotate(45deg);
+  }
+  details.fold[open] > summary .chev { transform: rotate(180deg); }
+  .fcount {
+    flex: none; font-size: 11.5px; font-weight: 600; color: var(--muted);
+    background: #F0EEE9; border: 1px solid var(--line); border-radius: 20px;
+    padding: 2px 9px; letter-spacing: .3px;
+  }
+  details.fold:not([open]) > summary { margin-bottom: 0; }
 
   .vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
   .vgrid.hero-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
@@ -110,6 +142,10 @@
   @media (max-width: 720px) {
     .igrid { grid-template-columns: repeat(2, 1fr); }
     h1.title { font-size: 30px; }
+    details.fold h2 { font-size: 20px; }
+    details.fold > summary { padding: 6px 0; }
+    details.fold:not([open]) .fdesc { display: none; }
+    section, footer { scroll-margin-top: 115px; }
   }
 </style>
 </head>
@@ -165,26 +201,27 @@
       </figure>
 
       <figure class="vcard">
-        <video src="media/grohak/videos/gree-w2.mp4" controls preload="metadata" playsinline></video>
-        <figcaption><b>Greenlite Holdings</b><span>Weekly investor update, batch 2</span></figcaption>
+        <video src="media/omni-dental/omni-sonrisal-la-mesa.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Omni Dental</b><span>Sonrisal implants: back at the table</span></figcaption>
       </figure>
   </div>
 </section>
 
 <section id="video" class="wrap">
-  <div class="shead">
-    <h2>Grohak Agency · Video</h2>
-    <p>Script to export: hooks, AI scene generation, edit, burned-in captions, brand end-cards.</p>
-  </div>
-  <div class="vgrid">
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Grohak Agency · Video<span class="fcount">17</span></h2>
+      <span class="fdesc">Script to export: hooks, AI scene generation, edit, burned-in captions, brand end-cards.</span>
+    </summary>
+    <div class="vgrid">
       <figure class="vcard">
-        <video src="media/grohak/videos/dol-back-for-found-oil.mp4" controls preload="metadata" playsinline></video>
-        <figcaption><b>Dolomite Energy</b><span>Back for oil that's already been found</span></figcaption>
+        <video src="media/omni-dental/omni-sonrisal-aplazando.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Omni Dental</b><span>Sonrisal implants: the cost of postponing</span></figcaption>
       </figure>
 
-      <figure class="vcard square">
-        <video src="media/grohak/videos/dol-back-for-found-oil-1x1.mp4" controls preload="metadata" playsinline></video>
-        <figcaption><b>Dolomite Energy</b><span>Same film adapted to 1:1</span></figcaption>
+      <figure class="vcard">
+        <video src="media/grohak/videos/gree-w2.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Greenlite Holdings</b><span>Weekly investor update, batch 2</span></figcaption>
       </figure>
 
       <figure class="vcard">
@@ -198,6 +235,16 @@
       </figure>
 
       <figure class="vcard">
+        <video src="media/grohak/videos/gree-0917-oklahoma-foundry.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Greenlite Holdings</b><span>Oklahoma City raise, generated-picture cut</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/gree-0917-own-shares-foundry.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Greenlite Holdings</b><span>Own shares, generated-picture cut</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
         <video src="media/grohak/videos/fr-video1.mp4" controls preload="metadata" playsinline></video>
         <figcaption><b>Client FR</b><span>Vertical brand film</span></figcaption>
       </figure>
@@ -208,13 +255,23 @@
       </figure>
 
       <figure class="vcard">
-        <video src="media/grohak/videos/awe-already-standing.mp4" controls preload="metadata" playsinline></video>
-        <figcaption><b>Ethos Baja</b><span>Already standing, built on real footage</span></figcaption>
+        <video src="media/grohak/videos/dol-0915-prospect-angle-a.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Dolomite Energy</b><span>Prospecting ad, angle A</span></figcaption>
       </figure>
 
       <figure class="vcard">
-        <video src="media/grohak/videos/awe-own-it.mp4" controls preload="metadata" playsinline></video>
-        <figcaption><b>Ethos Baja</b><span>Own it, the perk-led angle</span></figcaption>
+        <video src="media/grohak/videos/dol-0915-webinar-explained.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Dolomite Energy</b><span>Webinar ad: the speaker and the live hour</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/pye-0914-floor-is-yours.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>Pytheas Energy</b><span>Webinar ad: for one hour the floor is yours</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/grohak/videos/32red-alula-webinar.mp4" controls preload="metadata" playsinline></video>
+        <figcaption><b>32 Red Entertainment</b><span>ALULA investor webinar ad</span></figcaption>
       </figure>
 
       <figure class="vcard">
@@ -238,23 +295,20 @@
       </figure>
 
       <figure class="vcard">
-        <video src="media/grohak/videos/pye-v2.mp4" controls preload="metadata" playsinline></video>
-        <figcaption><b>Pytheas Energy</b><span>Investor film, cut 2</span></figcaption>
-      </figure>
-
-      <figure class="vcard">
         <video src="media/grohak/videos/pye-ai-finds-20s.mp4" controls preload="metadata" playsinline></video>
         <figcaption><b>Pytheas Energy</b><span>20-second cut: AI Finds / We Buy / You Invest</span></figcaption>
       </figure>
-  </div>
+    </div>
+  </details>
 </section>
 
 <section id="campaigns" class="wrap">
-  <div class="shead">
-    <h2>Grohak Agency · Ad campaigns</h2>
-    <p>Static ads for Meta, one fixed spine and one variable per batch.</p>
-  </div>
-  <div class="igrid">
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Grohak Agency · Ad campaigns<span class="fcount">28</span></h2>
+      <span class="fdesc">Static ads for Meta, one fixed spine and one variable per batch.</span>
+    </summary>
+    <div class="igrid">
       <figure class="icard featured">
         <img src="media/grohak/images/spo-ad1.png" alt="" loading="lazy">
         <figcaption><b>Spongelle</b><span>Static ad</span></figcaption>
@@ -394,7 +448,8 @@
         <img src="media/grohak/images/pye-ad5-4.png" alt="" loading="lazy">
         <figcaption><b>Pytheas Energy</b><span>Static ad, 9:16 cut</span></figcaption>
       </figure>
-  </div>
+    </div>
+  </details>
 </section>
 
 <section id="landingpages" class="wrap">
@@ -571,6 +626,41 @@
     <div><dt>Based in</dt><dd>Lima, Peru · Remote</dd></div>
   </dl>
 </footer>
+
+<script>
+(function () {
+  // Desktop keeps the grids open; a phone folds them, for the reason in the
+  // .fold comment in the stylesheet. A tap on a header wins from then on, so
+  // rotating the phone never re-closes a section opened by hand.
+  var mq = window.matchMedia("(max-width: 720px)");
+  var folds = [].slice.call(document.querySelectorAll("details.fold"));
+
+  folds.forEach(function (d) {
+    d.querySelector("summary").addEventListener("click", function () {
+      d.dataset.touched = "1";
+    });
+  });
+
+  function sync() {
+    folds.forEach(function (d) {
+      if (!d.dataset.touched) d.open = !mq.matches;
+    });
+  }
+  sync();
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  else if (mq.addListener) mq.addListener(sync);
+
+  // A nav jump into a folded section has to unfold it, or the link lands on a
+  // heading with nothing underneath it.
+  function openHash() {
+    var el = location.hash && document.getElementById(location.hash.slice(1));
+    var d = el && el.querySelector("details.fold");
+    if (d && !d.open) { d.open = true; d.dataset.touched = "1"; }
+  }
+  window.addEventListener("hashchange", openHash);
+  openHash();
+})();
+</script>
 
 </body>
 </html>

@@ -4,19 +4,22 @@
 VIDEOS = [
     # (file, client, caption, featured). Mateo's top picks open the page from
     # TOP_VIDEOS instead, so nothing here is promoted; the flag is kept for the record.
-    ("dol-back-for-found-oil.mp4", "Dolomite Energy", "Back for oil that's already been found", False),
-    ("dol-back-for-found-oil-1x1.mp4", "Dolomite Energy", "Same film adapted to 1:1", False, "1:1"),
+    ("media/omni-dental/omni-sonrisal-aplazando.mp4", "Omni Dental", "Sonrisal implants: the cost of postponing", False),
+    ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", False),
     ("rox-webinarvid2.mp4", "RoxStart AI Logistics", "Investor webinar ad, cut 2", False),
     ("gree-broader-access.mp4", "Greenlite Holdings", "Broader access, same brand engine", False),
+    ("gree-0917-oklahoma-foundry.mp4", "Greenlite Holdings", "Oklahoma City raise, generated-picture cut", False),
+    ("gree-0917-own-shares-foundry.mp4", "Greenlite Holdings", "Own shares, generated-picture cut", False),
     ("fr-video1.mp4", "Client FR", "Vertical brand film", False),
     ("rc-video2.mp4", "Roll Craft", "Vertical brand video, cut 2", False),
-    ("awe-already-standing.mp4", "Ethos Baja", "Already standing, built on real footage", False),
-    ("awe-own-it.mp4", "Ethos Baja", "Own it, the perk-led angle", False),
+    ("dol-0915-prospect-angle-a.mp4", "Dolomite Energy", "Prospecting ad, angle A", False),
+    ("dol-0915-webinar-explained.mp4", "Dolomite Energy", "Webinar ad: the speaker and the live hour", False),
+    ("pye-0914-floor-is-yours.mp4", "Pytheas Energy", "Webinar ad: for one hour the floor is yours", False),
+    ("32red-alula-webinar.mp4", "32 Red Entertainment", "ALULA investor webinar ad", False),
     ("roxg-v2.mp4", "RoxStart AI Logistics (RoxVault)", "Lead-gen film, cut 2", False),
     ("roxg-v1.mp4", "RoxStart AI Logistics (RoxVault)", "Lead-gen film, cut 1", False),
     ("spo-v2.mp4", "Spongelle", "Vertical ad, cut 2", False),
     ("glo-v1.mp4", "GLO by Gabbi", "Investor webinar cut", False),
-    ("pye-v2.mp4", "Pytheas Energy", "Investor film, cut 2", False),
     ("pye-ai-finds-20s.mp4", "Pytheas Energy", "20-second cut: AI Finds / We Buy / You Invest", False),
 ]
 
@@ -29,8 +32,8 @@ TOP_VIDEOS = [
          caption="Brand video, AI production"),
     dict(src="media/grohak/videos/arm-own-mountain.mp4", client="American Resort Partners",
          caption="Own the mountain"),
-    dict(src="media/grohak/videos/gree-w2.mp4", client="Greenlite Holdings",
-         caption="Weekly investor update, batch 2"),
+    dict(src="media/omni-dental/omni-sonrisal-la-mesa.mp4", client="Omni Dental",
+         caption="Sonrisal implants: back at the table"),
 ]
 
 LANDING_PAGES = [
@@ -153,6 +156,49 @@ def image_card(file, client, caption, featured):
         <figcaption><b>{client}</b><span>{caption}</span></figcaption>
       </figure>"""
 
+# The fold script lives out here rather than inside the HTML f-string below:
+# in there every brace would need doubling, which is how you end up with a
+# stylesheet that silently stops parsing halfway down.
+FOLD_JS = """
+(function () {
+  // Desktop keeps the grids open; a phone folds them, for the reason in the
+  // .fold comment in the stylesheet. A tap on a header wins from then on, so
+  // rotating the phone never re-closes a section opened by hand.
+  var mq = window.matchMedia("(max-width: 720px)");
+  var folds = [].slice.call(document.querySelectorAll("details.fold"));
+
+  folds.forEach(function (d) {
+    d.querySelector("summary").addEventListener("click", function () {
+      d.dataset.touched = "1";
+    });
+  });
+
+  function sync() {
+    folds.forEach(function (d) {
+      if (!d.dataset.touched) d.open = !mq.matches;
+    });
+  }
+  sync();
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  else if (mq.addListener) mq.addListener(sync);
+
+  // A nav jump into a folded section has to unfold it, or the link lands on a
+  // heading with nothing underneath it.
+  function openHash() {
+    var el = location.hash && document.getElementById(location.hash.slice(1));
+    var d = el && el.querySelector("details.fold");
+    if (d && !d.open) { d.open = true; d.dataset.touched = "1"; }
+  }
+  window.addEventListener("hashchange", openHash);
+  openHash();
+})();
+"""
+
+# Counts for the pills in the folded headers, so a collapsed section still
+# says how much work is inside it.
+n_videos = len(VIDEOS)
+n_images = len(ALL_IMAGES)
+
 top_videos_html = "\n".join(video_card(t["src"], t["client"], t["caption"]) for t in TOP_VIDEOS)
 grohak_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in VIDEOS)
 
@@ -245,10 +291,42 @@ HTML = f"""<!doctype html>
   .contact {{ margin-top: 20px; font-size: 14px; color: var(--muted); }}
   .contact span {{ margin-right: 18px; }}
 
-  section {{ padding: 52px 0; border-top: 1px solid var(--line); }}
+  section {{ padding: 52px 0; border-top: 1px solid var(--line); scroll-margin-top: 70px; }}
+  footer {{ scroll-margin-top: 70px; }}
   .shead {{ display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; flex-wrap: wrap; gap: 8px; }}
   .shead h2 {{ font-size: 24px; margin: 0; }}
   .shead p {{ margin: 0; color: var(--muted); font-size: 14px; max-width: 460px; }}
+
+  /* Collapsible sections. A phone lays these grids out one card per row, so
+     left open the Video and Ad campaigns sections push Landing pages and
+     Earlier work thousands of pixels down and nobody reaches them. The script
+     at the end of the body folds them under 721px and leaves desktop as it
+     was. Native <details>, so it still opens with no JS and on a keyboard. */
+  details.fold {{ margin: 0; }}
+  details.fold > summary {{
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px; margin-bottom: 26px;
+    cursor: pointer; list-style: none; -webkit-tap-highlight-color: transparent;
+  }}
+  details.fold > summary::-webkit-details-marker {{ display: none; }}
+  details.fold > summary::marker {{ content: ""; }}
+  details.fold > summary:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }}
+  details.fold h2 {{ display: flex; align-items: center; gap: 10px; font-size: 24px; margin: 0; }}
+  details.fold > summary:hover h2 {{ color: var(--accent); }}
+  .fdesc {{ color: var(--muted); font-size: 14px; max-width: 460px; }}
+  .chev {{ flex: none; width: 13px; height: 13px; color: var(--muted); transition: transform .18s ease; }}
+  .chev::before {{
+    content: ""; display: block; width: 7px; height: 7px; margin: 1px 0 0 2px;
+    border-right: 1.9px solid currentColor; border-bottom: 1.9px solid currentColor;
+    transform: rotate(45deg);
+  }}
+  details.fold[open] > summary .chev {{ transform: rotate(180deg); }}
+  .fcount {{
+    flex: none; font-size: 11.5px; font-weight: 600; color: var(--muted);
+    background: #F0EEE9; border: 1px solid var(--line); border-radius: 20px;
+    padding: 2px 9px; letter-spacing: .3px;
+  }}
+  details.fold:not([open]) > summary {{ margin-bottom: 0; }}
 
   .vgrid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }}
   .vgrid.hero-grid {{ grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }}
@@ -315,6 +393,10 @@ HTML = f"""<!doctype html>
   @media (max-width: 720px) {{
     .igrid {{ grid-template-columns: repeat(2, 1fr); }}
     h1.title {{ font-size: 30px; }}
+    details.fold h2 {{ font-size: 20px; }}
+    details.fold > summary {{ padding: 6px 0; }}
+    details.fold:not([open]) .fdesc {{ display: none; }}
+    section, footer {{ scroll-margin-top: 115px; }}
   }}
 </style>
 </head>
@@ -358,21 +440,25 @@ HTML = f"""<!doctype html>
 </section>
 
 <section id="video" class="wrap">
-  <div class="shead">
-    <h2>Grohak Agency · Video</h2>
-    <p>Script to export: hooks, AI scene generation, edit, burned-in captions, brand end-cards.</p>
-  </div>
-  <div class="vgrid">{grohak_videos_html}
-  </div>
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Grohak Agency · Video<span class="fcount">{n_videos}</span></h2>
+      <span class="fdesc">Script to export: hooks, AI scene generation, edit, burned-in captions, brand end-cards.</span>
+    </summary>
+    <div class="vgrid">{grohak_videos_html}
+    </div>
+  </details>
 </section>
 
 <section id="campaigns" class="wrap">
-  <div class="shead">
-    <h2>Grohak Agency · Ad campaigns</h2>
-    <p>Static ads for Meta, one fixed spine and one variable per batch.</p>
-  </div>
-  <div class="igrid">{image_grid_html}
-  </div>
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Grohak Agency · Ad campaigns<span class="fcount">{n_images}</span></h2>
+      <span class="fdesc">Static ads for Meta, one fixed spine and one variable per batch.</span>
+    </summary>
+    <div class="igrid">{image_grid_html}
+    </div>
+  </details>
 </section>
 
 <section id="landingpages" class="wrap">
@@ -403,6 +489,8 @@ HTML = f"""<!doctype html>
     <div><dt>Based in</dt><dd>Lima, Peru · Remote</dd></div>
   </dl>
 </footer>
+
+<script>{FOLD_JS}</script>
 
 </body>
 </html>
