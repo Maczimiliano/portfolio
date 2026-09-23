@@ -5,6 +5,8 @@ VIDEOS = [
     # (file, client, caption, featured). Mateo's top picks open the page from
     # TOP_VIDEOS instead, so nothing here is promoted; the flag is kept for the record.
     ("media/omni-dental/omni-sonrisal-aplazando.mp4", "Omni Dental", "Sonrisal implants: the cost of postponing", False),
+    ("comp-0920-23-horas.mp4", "COMPLETE de Alpha Support", "Las otras 23 horas, voiced ad", False),
+    ("comp-0920-desayuno-sin-voz.mp4", "COMPLETE de Alpha Support", "Desayuno, no-voiceover cut", False),
     ("gree-0917-oklahoma-foundry.mp4", "Greenlite Holdings", "Oklahoma City raise, generated-picture cut", False),
     ("gree-0917-own-shares-foundry.mp4", "Greenlite Holdings", "Own shares, generated-picture cut", False),
     ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", False),
