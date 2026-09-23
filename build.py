@@ -29,11 +29,14 @@ INDEPENDENT = [
     # hace leer como un cliente de la agencia, que es justo lo contrario de lo
     # que demuestra. Rutas completas, vienen de carpetas distintas.
     dict(src="media/grohak/videos/comp-0920-23-horas.mp4", client="COMPLETE de Alpha Support",
-         caption="Las otras 23 horas, voiced ad"),
+         caption="Las otras 23 horas, voiced ad",
+         poster="media/posters/comp-0920-23-horas.jpg"),
     dict(src="media/grohak/videos/comp-0920-desayuno-sin-voz.mp4", client="COMPLETE de Alpha Support",
-         caption="Desayuno, no-voiceover cut"),
+         caption="Desayuno, no-voiceover cut",
+         poster="media/posters/comp-0920-desayuno-sin-voz.jpg"),
     dict(src="media/omni-dental/omni-sonrisal-aplazando.mp4", client="Omni Dental",
-         caption="Sonrisal implants: the cost of postponing"),
+         caption="Sonrisal implants: the cost of postponing",
+         poster="media/posters/omni-sonrisal-aplazando.jpg"),
 ]
 
 TOP_VIDEOS = [
@@ -136,12 +139,15 @@ EARLY = [
          note="A locked grid, type scale and colour system that let a non-designer publish on-brand property posts daily."),
 ]
 
-def video_card(file, client, caption, group="grohak", aspect="9:16"):
+def video_card(file, client, caption, group="grohak", aspect="9:16", poster=None):
     src = file if "/" in file else f"media/{group}/videos/{file}"
     cls = "vcard square" if aspect == "1:1" else "vcard"
+    # Sin poster la tarjeta queda negra hasta que llegan los metadatos, que en
+    # el CDN frio tardan: 7 de 31 videos listos a los 25s, medido en vivo.
+    pos = f' poster="{poster}"' if poster else ""
     return f"""
       <figure class="{cls}">
-        <video src="{src}" controls preload="metadata" playsinline></video>
+        <video src="{src}"{pos} controls preload="metadata" playsinline></video>
         <figcaption><b>{client}</b><span>{caption}</span></figcaption>
       </figure>"""
 
@@ -212,8 +218,10 @@ FOLD_JS = """
 n_videos = len(VIDEOS)
 n_images = len(ALL_IMAGES)
 
+n_independent = len(INDEPENDENT)
 independent_html = "\n".join(
-    video_card(t["src"], t["client"], t["caption"]) for t in INDEPENDENT)
+    video_card(t["src"], t["client"], t["caption"], poster=t.get("poster"))
+    for t in INDEPENDENT)
 
 top_videos_html = "\n".join(video_card(t["src"], t["client"], t["caption"]) for t in TOP_VIDEOS)
 grohak_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in VIDEOS)
@@ -423,7 +431,7 @@ HTML = f"""<!doctype html>
     <div class="brand"><img src="assets/mc-mark.png" alt="MC"> Mateo Calderón</div>
     <nav>
       <a href="#featured">Featured</a>
-      <a href="#independent">Independent</a>
+      <a href="#freelance">Freelance</a>
       <a href="#video">Video</a>
       <a href="#campaigns">Campaigns</a>
       <a href="#landingpages">Landing pages</a>
@@ -456,13 +464,15 @@ HTML = f"""<!doctype html>
   </div>
 </section>
 
-<section id="independent" class="wrap">
-  <div class="shead">
-    <h2>Independent work</h2>
-    <p>My own brand, and client projects taken on directly rather than through the agency.</p>
-  </div>
-  <div class="vgrid hero-grid">{independent_html}
-  </div>
+<section id="freelance" class="wrap">
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Freelance work<span class="fcount">{n_independent}</span></h2>
+      <span class="fdesc">My own brand, and client projects taken on directly rather than through the agency.</span>
+    </summary>
+    <div class="vgrid hero-grid">{independent_html}
+    </div>
+  </details>
 </section>
 
 <section id="video" class="wrap">
