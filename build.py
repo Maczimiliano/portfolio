@@ -4,9 +4,6 @@
 VIDEOS = [
     # (file, client, caption, featured). Mateo's top picks open the page from
     # TOP_VIDEOS instead, so nothing here is promoted; the flag is kept for the record.
-    ("media/omni-dental/omni-sonrisal-aplazando.mp4", "Omni Dental", "Sonrisal implants: the cost of postponing", False),
-    ("comp-0920-23-horas.mp4", "COMPLETE de Alpha Support", "Las otras 23 horas, voiced ad", False),
-    ("comp-0920-desayuno-sin-voz.mp4", "COMPLETE de Alpha Support", "Desayuno, no-voiceover cut", False),
     ("gree-0917-oklahoma-foundry.mp4", "Greenlite Holdings", "Oklahoma City raise, generated-picture cut", False),
     ("gree-0917-own-shares-foundry.mp4", "Greenlite Holdings", "Own shares, generated-picture cut", False),
     ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", False),
@@ -23,6 +20,20 @@ VIDEOS = [
     ("spo-v2.mp4", "Spongelle", "Vertical ad, cut 2", False),
     ("glo-v1.mp4", "GLO by Gabbi", "Investor webinar cut", False),
     ("pye-ai-finds-20s.mp4", "Pytheas Energy", "20-second cut: AI Finds / We Buy / You Invest", False),
+]
+
+INDEPENDENT = [
+    # Trabajo que Mateo tomó por su cuenta, fuera de la agencia: su propia marca
+    # y un encargo directo de cliente. Va en su propia sección porque la grilla
+    # de abajo se titula "Grohak Agency", y acreditar ahí su marca propia la
+    # hace leer como un cliente de la agencia, que es justo lo contrario de lo
+    # que demuestra. Rutas completas, vienen de carpetas distintas.
+    dict(src="media/grohak/videos/comp-0920-23-horas.mp4", client="COMPLETE de Alpha Support",
+         caption="Las otras 23 horas, voiced ad"),
+    dict(src="media/grohak/videos/comp-0920-desayuno-sin-voz.mp4", client="COMPLETE de Alpha Support",
+         caption="Desayuno, no-voiceover cut"),
+    dict(src="media/omni-dental/omni-sonrisal-aplazando.mp4", client="Omni Dental",
+         caption="Sonrisal implants: the cost of postponing"),
 ]
 
 TOP_VIDEOS = [
@@ -200,6 +211,9 @@ FOLD_JS = """
 # says how much work is inside it.
 n_videos = len(VIDEOS)
 n_images = len(ALL_IMAGES)
+
+independent_html = "\n".join(
+    video_card(t["src"], t["client"], t["caption"]) for t in INDEPENDENT)
 
 top_videos_html = "\n".join(video_card(t["src"], t["client"], t["caption"]) for t in TOP_VIDEOS)
 grohak_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in VIDEOS)
@@ -409,6 +423,7 @@ HTML = f"""<!doctype html>
     <div class="brand"><img src="assets/mc-mark.png" alt="MC"> Mateo Calderón</div>
     <nav>
       <a href="#featured">Featured</a>
+      <a href="#independent">Independent</a>
       <a href="#video">Video</a>
       <a href="#campaigns">Campaigns</a>
       <a href="#landingpages">Landing pages</a>
@@ -438,6 +453,15 @@ HTML = f"""<!doctype html>
     <p>The pieces I would put in front of you first, whichever brand they were made for.</p>
   </div>
   <div class="vgrid hero-grid">{top_videos_html}
+  </div>
+</section>
+
+<section id="independent" class="wrap">
+  <div class="shead">
+    <h2>Independent work</h2>
+    <p>My own brand, and client projects taken on directly rather than through the agency.</p>
+  </div>
+  <div class="vgrid hero-grid">{independent_html}
   </div>
 </section>
 
