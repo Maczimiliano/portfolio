@@ -37,6 +37,23 @@ INDEPENDENT = [
     dict(src="media/omni-dental/omni-sonrisal-aplazando.mp4", client="Omni Dental",
          caption="Sonrisal implants: the cost of postponing",
          poster="media/posters/omni-sonrisal-aplazando.jpg"),
+    # Reels de la ultima ronda de clientes, ultima version de cada uno.
+    # Marca confirmada en pantalla: el logo de cada end card dice el nombre.
+    dict(src="media/freelance/lop-r4-piernas-pesadas.mp4", client="Dr. Carlos López, Neurocirujano",
+         caption="Heavy legs, explained by a neurosurgeon",
+         poster="media/posters/lop-r4-piernas-pesadas.jpg"),
+    dict(src="media/freelance/famaco-r1-black-week.mp4", client="Famaco",
+         caption="Black Week hardware store promo",
+         poster="media/posters/famaco-r1-black-week.jpg"),
+    dict(src="media/freelance/omg-r2-bolita-mamografia.mp4", client="Dr. Omar García, Cirujano Oncólogo",
+         caption="Don't wait to feel a lump: the mammogram",
+         poster="media/posters/omg-r2-bolita-mamografia.jpg"),
+    dict(src="media/freelance/omg-r4-momento-mas-dificil.mp4", client="Dr. Omar García, Cirujano Oncólogo",
+         caption="The hardest moment of the job",
+         poster="media/posters/omg-r4-momento-mas-dificil.jpg"),
+    dict(src="media/freelance/vil-r4-cirugia-de-revision.mp4", client="Dr. Julio Villanueva, Bariatric Surgeon",
+         caption="Revision bariatric surgery",
+         poster="media/posters/vil-r4-cirugia-de-revision.jpg"),
 ]
 
 TOP_VIDEOS = [
