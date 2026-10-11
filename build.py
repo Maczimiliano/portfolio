@@ -4,6 +4,7 @@
 VIDEOS = [
     # (file, client, caption, featured). Mateo's top picks open the page from
     # TOP_VIDEOS instead, so nothing here is promoted; the flag is kept for the record.
+    ("pye-0929-real-oil-motion.mp4", "Pytheas Energy", "Motion film: real, producing oil", False),
     ("gree-0917-oklahoma-foundry.mp4", "Greenlite Holdings", "Oklahoma City raise, generated-picture cut", False),
     ("gree-0917-own-shares-foundry.mp4", "Greenlite Holdings", "Own shares, generated-picture cut", False),
     ("gree-w2.mp4", "Greenlite Holdings", "Weekly investor update, batch 2", False),
@@ -20,6 +21,7 @@ VIDEOS = [
     ("spo-v2.mp4", "Spongelle", "Vertical ad, cut 2", False),
     ("glo-v1.mp4", "GLO by Gabbi", "Investor webinar cut", False),
     ("pye-ai-finds-20s.mp4", "Pytheas Energy", "20-second cut: AI Finds / We Buy / You Invest", False),
+    ("arm-own-mountain.mp4", "American Resort Partners", "Own the mountain", False),
 ]
 
 INDEPENDENT = [
@@ -28,7 +30,7 @@ INDEPENDENT = [
     # de abajo se titula "Grohak Agency", y acreditar ahí su marca propia la
     # hace leer como un cliente de la agencia, que es justo lo contrario de lo
     # que demuestra. Rutas completas, vienen de carpetas distintas.
-    dict(src="media/grohak/videos/comp-0920-23-horas.mp4", client="COMPLETE de Alpha Support",
+    dict(src="media/grohak/videos/comp-1003-23-horas-v3.mp4", client="COMPLETE de Alpha Support",
          caption="Las otras 23 horas, voiced ad",
          poster="media/posters/comp-0920-23-horas.jpg"),
     dict(src="media/grohak/videos/comp-0920-desayuno-sin-voz.mp4", client="COMPLETE de Alpha Support",
@@ -63,10 +65,12 @@ TOP_VIDEOS = [
          caption="Cinco señales, kinetic-caption ad"),
     dict(src="media/early/hellocash/hellocash-1.mp4", client="helloCash",
          caption="Brand video, AI production"),
-    dict(src="media/grohak/videos/arm-own-mountain.mp4", client="American Resort Partners",
-         caption="Own the mountain"),
-    dict(src="media/omni-dental/omni-sonrisal-la-mesa.mp4", client="Omni Dental",
-         caption="Sonrisal implants: back at the table"),
+    dict(src="media/grohak/videos/comp-1003-23-horas-v3.mp4", client="COMPLETE de Alpha Support",
+         caption="Las otras 23 horas, voiced ad",
+         poster="media/posters/comp-0920-23-horas.jpg"),
+    dict(src="media/grohak/videos/pye-0929-real-oil-motion.mp4", client="Pytheas Energy",
+         caption="Motion film: real, producing oil",
+         poster="media/posters/pye-0929-real-oil-motion.jpg"),
 ]
 
 LANDING_PAGES = [
@@ -240,7 +244,7 @@ independent_html = "\n".join(
     video_card(t["src"], t["client"], t["caption"], poster=t.get("poster"))
     for t in INDEPENDENT)
 
-top_videos_html = "\n".join(video_card(t["src"], t["client"], t["caption"]) for t in TOP_VIDEOS)
+top_videos_html = "\n".join(video_card(t["src"], t["client"], t["caption"], poster=t.get("poster")) for t in TOP_VIDEOS)
 grohak_videos_html = "\n".join(video_card(v[0], v[1], v[2], aspect=(v[4] if len(v) > 4 else "9:16")) for v in VIDEOS)
 
 image_grid_html = "\n".join(image_card(f, client, cap, feat) for f, client, cap, feat in ALL_IMAGES)
