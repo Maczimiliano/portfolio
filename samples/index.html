@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mateo Calderón Video Samples</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root {
+  --ink: #0D1626;
+  --panel: #142035;
+  --line: #24324B;
+  --text: #EEF1F6;
+  --muted: #9AA6BB;
+  --gold: #C9A227;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 32px;
+}
+header { display: grid; gap: 8px; }
+.name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(30px, 6vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+.name span { color: var(--gold); }
+.lede { margin: 0; color: var(--muted); max-width: 60ch; }
+.grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1400px) { .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.film { display: grid; grid-template-rows: auto 1fr; gap: 14px; min-width: 0; }
+.film video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.meta { display: grid; gap: 6px; min-width: 0; align-content: start; }
+.client {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.client time { color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.film h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0;
+  text-wrap: balance;
+}
+.film p { margin: 0; color: var(--muted); font-size: 14px; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer a { color: var(--text); text-underline-offset: 3px; }
+a:focus-visible, video:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 class="name">Mateo <span>Calderón</span></h1>
+    <p class="lede">Short-form video ads for Meta, Instagram and TikTok.</p>
+  </header>
+
+  <main class="grid">
+    <article class="film">
+      <video controls playsinline preload="metadata" poster="media/omni-dental.jpg" src="../media/omni-dental/omni-dental-1.mp4" aria-label="Omni Dental, Cinco señales"></video>
+      <div class="meta">
+        <div class="client">Omni Dental <time>0:46</time></div>
+        <h2>Cinco señales, an ad for dental group owners</h2>
+        <p>Cut from the raw 4K takes, with kinetic captions on every line, motion-graphic cards, b-roll and a sound design pass.</p>
+      </div>
+    </article>
+
+    <article class="film">
+      <video controls playsinline preload="metadata" poster="media/johanna-sanchez.jpg" src="media/johanna-sanchez.mp4" aria-label="Lic. Johanna Sánchez, the cash offer"></video>
+      <div class="meta">
+        <div class="client">Lic. Johanna Sánchez, real estate <time>0:49</time></div>
+        <h2>Would you take a $140,000 cash offer on a $150,000 listing?</h2>
+        <p>Her key lines set behind her head, zooms that follow her hands, an animated checklist and poll, and an end card built from her logo.</p>
+      </div>
+    </article>
+
+    <article class="film">
+      <video controls playsinline preload="metadata" poster="media/clinica-ros.jpg" src="media/clinica-ros.mp4" aria-label="Clínica Dental Ros, implants in Moncada"></video>
+      <div class="meta">
+        <div class="client">Clínica Dental Ros <time>0:31</time></div>
+        <h2>Dental implants in Moncada, told by the clinic's own dentist</h2>
+        <p>Graded to one natural look, with b-roll of the X-rays and scanner, captions, and the offer on the end card.</p>
+      </div>
+    </article>
+
+    <article class="film">
+      <video controls playsinline preload="metadata" poster="media/oral-dent.jpg" src="../media/freelance/oral-dent-r2-sellantes.mp4" aria-label="Oral Dent, sealants for pits and fissures"></video>
+      <div class="meta">
+        <div class="client">Oral Dent <time>0:40</time></div>
+        <h2>Sealants for pits and fissures, explained for parents</h2>
+        <p>Two-tier captions, an illustrated card for each step of the treatment, and the clinic's animated logo to close.</p>
+      </div>
+    </article>
+
+    <article class="film">
+      <video controls playsinline preload="metadata" poster="media/elements-lawn.jpg" src="media/elements-lawn.mp4" aria-label="Elements Lawn and Landscape, switching lawn care companies"></video>
+      <div class="meta">
+        <div class="client">Elements Lawn &amp; Landscape <time>1:16</time></div>
+        <h2>Unhappy with your lawn care company? Three reasons to switch</h2>
+        <p>In English. The owner walks the property and talks straight to camera, with big kinetic words over the shot.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer>More work at <a href="https://maczimiliano.github.io/portfolio/">maczimiliano.github.io/portfolio</a></footer>
+</div>
+<script>
+  const films = document.querySelectorAll("video");
+  films.forEach(v => v.addEventListener("play", () => {
+    films.forEach(o => { if (o !== v) o.pause(); });
+  }));
+</script>
+</body>
+</html>
