@@ -77,6 +77,11 @@
   }
   details.fold:not([open]) > summary { margin-bottom: 0; }
 
+  .onote { max-width: 760px; margin: 0 0 24px; color: #33343B; font-size: 14.5px; }
+  .onote p { margin: 0 0 10px; }
+  .onote ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13.5px; }
+  .onote li { margin: 4px 0; }
+
   .vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
   .vgrid.hero-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .vgrid.small { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
@@ -156,6 +161,7 @@
     <div class="brand"><img src="assets/mc-mark.png" alt="MC"> Mateo Calderón</div>
     <nav>
       <a href="#featured">Featured</a>
+      <a href="#omni">Omni Dental</a>
       <a href="#freelance">Freelance</a>
       <a href="#video">Video</a>
       <a href="#campaigns">Campaigns</a>
@@ -208,10 +214,53 @@
   </div>
 </section>
 
+<section id="omni" class="wrap">
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Omni Dental<span class="fcount">4</span></h2>
+      <span class="fdesc">Performance Video Ads Editor · Oct 2026 to present · Remote.</span>
+    </summary>
+    <div class="onote">
+      <p>Omni Dental is a Spanish patient-acquisition agency that runs Meta lead-generation campaigns for dental clinics.
+        I make the video ads: I take a proven concept from the Meta Ad Library, rebuild it around each clinic's own facts,
+        footage and photos, and deliver finished 9:16 Reels.</p>
+      <ul>
+        <li>Implant and Black Friday reels for nine clinics in Spain and Peru: script, voiceover, AI-generated scenes
+          (ChatGPT first frames, Google Flow video), edit, kinetic captions and end card.</li>
+        <li>Checked every generated scene for realism (teeth, hands, signage) before it went to a clinic, and wrote hooks
+          around Meta's rules and Spanish healthcare-advertising limits.</li>
+        <li>Edited video sales letters for Omni's own dentist-facing offer, and wrote the team's mini-guide for building
+          these ads with Claude Code and Google Flow.</li>
+      </ul>
+    </div>
+    <div class="vgrid hero-grid">
+      <figure class="vcard">
+        <video src="media/omni-dental/omni-nyp-black-friday.mp4" poster="media/posters/omni-nyp-black-friday.jpg" controls preload="metadata" playsinline></video>
+        <figcaption><b>Núñez y Pérez (Madrid)</b><span>Implants, Black Friday: AI scenes, the clinic's real footage, karaoke captions</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/omni-dental/omni-oli-black-friday.mp4" poster="media/posters/omni-oli-black-friday.jpg" controls preload="metadata" playsinline></video>
+        <figcaption><b>Instituto Odontológico Oliver (Torrejón de Ardoz)</b><span>Implants, Black Friday: local hook, built in under a day</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/omni-dental/omni-fyo-black-friday.mp4" poster="media/posters/omni-fyo-black-friday.jpg" controls preload="metadata" playsinline></video>
+        <figcaption><b>Fonseca y Obando (Madrid)</b><span>Implants, Black Friday: bread-and-teeth hook, real façade and reception</span></figcaption>
+      </figure>
+
+      <figure class="vcard">
+        <video src="media/omni-dental/omni-sonrisal-aplazando.mp4" poster="media/posters/omni-sonrisal-aplazando.jpg" controls preload="metadata" playsinline></video>
+        <figcaption><b>Omni Dental technical test</b><span>Brief for a fictional clinic: the cost of postponing, 100% AI picture</span></figcaption>
+      </figure>
+    </div>
+  </details>
+</section>
+
 <section id="freelance" class="wrap">
   <details class="fold" open>
     <summary>
-      <h2><span class="chev" aria-hidden="true"></span>Freelance work<span class="fcount">8</span></h2>
+      <h2><span class="chev" aria-hidden="true"></span>Freelance work<span class="fcount">7</span></h2>
       <span class="fdesc">My own brand, and client projects taken on directly rather than through the agency.</span>
     </summary>
     <div class="vgrid hero-grid">
@@ -223,11 +272,6 @@
       <figure class="vcard">
         <video src="media/grohak/videos/comp-0920-desayuno-sin-voz.mp4" poster="media/posters/comp-0920-desayuno-sin-voz.jpg" controls preload="metadata" playsinline></video>
         <figcaption><b>COMPLETE de Alpha Support</b><span>Desayuno, no-voiceover cut</span></figcaption>
-      </figure>
-
-      <figure class="vcard">
-        <video src="media/omni-dental/omni-sonrisal-aplazando.mp4" poster="media/posters/omni-sonrisal-aplazando.jpg" controls preload="metadata" playsinline></video>
-        <figcaption><b>Omni Dental</b><span>Sonrisal implants: the cost of postponing</span></figcaption>
       </figure>
 
       <figure class="vcard">

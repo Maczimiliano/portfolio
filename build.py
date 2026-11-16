@@ -36,9 +36,6 @@ INDEPENDENT = [
     dict(src="media/grohak/videos/comp-0920-desayuno-sin-voz.mp4", client="COMPLETE de Alpha Support",
          caption="Desayuno, no-voiceover cut",
          poster="media/posters/comp-0920-desayuno-sin-voz.jpg"),
-    dict(src="media/omni-dental/omni-sonrisal-aplazando.mp4", client="Omni Dental",
-         caption="Sonrisal implants: the cost of postponing",
-         poster="media/posters/omni-sonrisal-aplazando.jpg"),
     # Reels de la ultima ronda de clientes, ultima version de cada uno.
     # Marca confirmada en pantalla: el logo de cada end card dice el nombre.
     dict(src="media/freelance/lop-r4-piernas-pesadas.mp4", client="Dr. Carlos López, Neurocirujano",
@@ -56,6 +53,23 @@ INDEPENDENT = [
     dict(src="media/freelance/vil-r4-cirugia-de-revision.mp4", client="Dr. Julio Villanueva, Bariatric Surgeon",
          caption="Revision bariatric surgery",
          poster="media/posters/vil-r4-cirugia-de-revision.jpg"),
+]
+
+OMNI = [
+    # Omni Dental, Oct 2026 to present. Final cuts only, music-bed versions.
+    # Clinic names are the brands on each reel's own end card.
+    dict(src="media/omni-dental/omni-nyp-black-friday.mp4", client="Núñez y Pérez (Madrid)",
+         caption="Implants, Black Friday: AI scenes, the clinic's real footage, karaoke captions",
+         poster="media/posters/omni-nyp-black-friday.jpg"),
+    dict(src="media/omni-dental/omni-oli-black-friday.mp4", client="Instituto Odontológico Oliver (Torrejón de Ardoz)",
+         caption="Implants, Black Friday: local hook, built in under a day",
+         poster="media/posters/omni-oli-black-friday.jpg"),
+    dict(src="media/omni-dental/omni-fyo-black-friday.mp4", client="Fonseca y Obando (Madrid)",
+         caption="Implants, Black Friday: bread-and-teeth hook, real façade and reception",
+         poster="media/posters/omni-fyo-black-friday.jpg"),
+    dict(src="media/omni-dental/omni-sonrisal-aplazando.mp4", client="Omni Dental technical test",
+         caption="Brief for a fictional clinic: the cost of postponing, 100% AI picture",
+         poster="media/posters/omni-sonrisal-aplazando.jpg"),
 ]
 
 TOP_VIDEOS = [
@@ -240,6 +254,10 @@ n_videos = len(VIDEOS)
 n_images = len(ALL_IMAGES)
 
 n_independent = len(INDEPENDENT)
+n_omni = len(OMNI)
+omni_html = "\n".join(
+    video_card(t["src"], t["client"], t["caption"], poster=t.get("poster"))
+    for t in OMNI)
 independent_html = "\n".join(
     video_card(t["src"], t["client"], t["caption"], poster=t.get("poster"))
     for t in INDEPENDENT)
@@ -373,6 +391,11 @@ HTML = f"""<!doctype html>
   }}
   details.fold:not([open]) > summary {{ margin-bottom: 0; }}
 
+  .onote {{ max-width: 760px; margin: 0 0 24px; color: #33343B; font-size: 14.5px; }}
+  .onote p {{ margin: 0 0 10px; }}
+  .onote ul {{ margin: 0; padding-left: 20px; color: var(--muted); font-size: 13.5px; }}
+  .onote li {{ margin: 4px 0; }}
+
   .vgrid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }}
   .vgrid.hero-grid {{ grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }}
   .vgrid.small {{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }}
@@ -452,6 +475,7 @@ HTML = f"""<!doctype html>
     <div class="brand"><img src="assets/mc-mark.png" alt="MC"> Mateo Calderón</div>
     <nav>
       <a href="#featured">Featured</a>
+      <a href="#omni">Omni Dental</a>
       <a href="#freelance">Freelance</a>
       <a href="#video">Video</a>
       <a href="#campaigns">Campaigns</a>
@@ -483,6 +507,30 @@ HTML = f"""<!doctype html>
   </div>
   <div class="vgrid hero-grid">{top_videos_html}
   </div>
+</section>
+
+<section id="omni" class="wrap">
+  <details class="fold" open>
+    <summary>
+      <h2><span class="chev" aria-hidden="true"></span>Omni Dental<span class="fcount">{n_omni}</span></h2>
+      <span class="fdesc">Performance Video Ads Editor · Oct 2026 to present · Remote.</span>
+    </summary>
+    <div class="onote">
+      <p>Omni Dental is a Spanish patient-acquisition agency that runs Meta lead-generation campaigns for dental clinics.
+        I make the video ads: I take a proven concept from the Meta Ad Library, rebuild it around each clinic's own facts,
+        footage and photos, and deliver finished 9:16 Reels.</p>
+      <ul>
+        <li>Implant and Black Friday reels for nine clinics in Spain and Peru: script, voiceover, AI-generated scenes
+          (ChatGPT first frames, Google Flow video), edit, kinetic captions and end card.</li>
+        <li>Checked every generated scene for realism (teeth, hands, signage) before it went to a clinic, and wrote hooks
+          around Meta's rules and Spanish healthcare-advertising limits.</li>
+        <li>Edited video sales letters for Omni's own dentist-facing offer, and wrote the team's mini-guide for building
+          these ads with Claude Code and Google Flow.</li>
+      </ul>
+    </div>
+    <div class="vgrid hero-grid">{omni_html}
+    </div>
+  </details>
 </section>
 
 <section id="freelance" class="wrap">
